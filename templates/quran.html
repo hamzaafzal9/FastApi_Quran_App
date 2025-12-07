@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .surah-header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .audio-player {
+            margin: 20px 0;
+        }
+
+        .verses {
+            text-align: right;
+            direction: rtl;
+        }
+
+        .verse {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .arabic {
+            font-size: 24px;
+            font-family: 'Amiri', serif;
+            color: #333;
+        }
+
+        .translation {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+            direction: ltr;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% if data %}
+    <div class="surah-header">
+        <h1>Surah Number: {{ data.surahNo }}</h1>
+
+        {% if data.audio %}
+        <div class="audio-player">
+            <audio controls>
+                <source src="{{ data.audio }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
+    </div>
+    <div class="verses">
+        {% for verse in data.formatted_verses %}
+        <div class="verse">
+            <p class="arabic">{{ verse.arabic }} ({{ verse.id }})</p>
+            <p class="translation">{{ verse.english }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="verses">
+        {% for ayah in data.ayahs %}
+        <div class="verse">
+            <p class="arabic">{{ ayah.text.ar }} ({{ ayah.ayahNo }})</p>
+            {% if ayah.text.read %}
+            <p class="translation">{{ ayah.text.read }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No data found.</p>
+    {% endif %}
+
+</body>
+
+</html>
