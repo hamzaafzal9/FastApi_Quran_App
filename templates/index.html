@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Reader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 60%;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #219150;
+        }
+
+        .examples {
+            font-size: 14px;
+            color: #999;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .tag {
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Quran Reader</h1>
+        <p>Enter a Surah number (1-114) to begin reading.</p>
+
+        <div class="search-box">
+            <input type="number" id="surahInput" placeholder="Surah No. (e.g. 1)" min="1" max="114">
+            <button onclick="goToSurah()">Read</button>
+        </div>
+
+        <div class="examples">
+            <strong>Direct Link Usage:</strong><br>
+            <span class="tag">/quran/1</span> - Read Surah Al-Fatiha<br>
+            <span class="tag">/quran/2/255</span> - Read Ayatul Kursi
+        </div>
+    </div>
+
+    <script>
+        function goToSurah() {
+            const num = document.getElementById('surahInput').value;
+            if (num) {
+                window.location.href = `/quran/${num}`;
+            } else {
+                alert("Please enter a Surah number");
+            }
+        }
+    </script>
+</body>
+
+</html>
