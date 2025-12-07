@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):
@@ -62,3 +62,4 @@ def get_aya(request: Request, sorah: int, aya: int):
         return templates.TemplateResponse("aya.html", {"request": request, "data": data})
     else:
         return {"error": f"Aya {sorah}:{aya} not found. Status: {response.status_code}"}
+
